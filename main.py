@@ -4,32 +4,6 @@ author: Daniel Ivánek
 email: ivanek.daniel99@gmail.com
 discord: notme1275
 """
-import task_template
-import re
-# print(task_template.TEXTS)
-slice_line =  "-" * 30
-
-Registered_accounts = {"bob" : "123" , "ann" : "pass123" , 
-                       "mike" : "password123", "liz" : "pass123"}
-
-def graphwrite():
-       words_lengths = {}
-
-       for word in splited_text:
-               length = len(word)
-               if length in words_lengths:
-                       words_lengths[length] += 1
-               else:
-                      words_lengths[length] = 1
-
-       max_length = max(words_lengths.keys())
-
-       for length in range(1, max_length + 1):
-                count = words_lengths.get(length, 0)
-                line = f"{length:2d}| {'*' * count} |{count}."
-                print(f"{length:3d}|{'*' * count:15s}|{count:2d}")
-
-
 
 # Vyzadat si prihlasovaci jmeno a heslo
 # Zadat jmeno a heslo
@@ -53,7 +27,32 @@ def graphwrite():
                             # sumu všech čísel (ne cifer) v textu.
 # Vytiskni vysledek
 
+
+import task_template
+import re
+# print(task_template.TEXTS)
+slice_line =  "-" * 30
+
+Registered_accounts = {"bob" : "123" , "ann" : "pass123" , 
+                       "mike" : "password123", "liz" : "pass123"}
 slice_line = "-" * 40
+
+def graphwrite():
+       words_lengths = {}
+
+       for word in splited_text:
+               length = len(word)
+               if length in words_lengths:
+                       words_lengths[length] += 1
+               else:
+                      words_lengths[length] = 1
+
+       max_length = max(words_lengths.keys())
+
+       for length in range(1, max_length + 1):
+                count = words_lengths.get(length, 0)
+                line = f"{length:2d}| {'*' * count} |{count}."
+                print(f"{length:3d}|{'*' * count:15s}|{count:2d}")
 
 def prihlasujici_fce():
 
@@ -66,25 +65,23 @@ def prihlasujici_fce():
                 if login_name in Registered_accounts and login_password == Registered_accounts[login_name]:
                         valid_login = True
                         print(f"""
-                {slice_line}
-                Welcome to the app, {login_name}
-                We have 3 texts to be analyzed.
-                {slice_line}
-                """)
+{slice_line}
+Welcome to the app, {login_name}
+We have 3 texts to be analyzed.
+{slice_line}
+""")
                         break
                 else:
                         print("Neplatné přihlašovací údaje")
 
-                if not valid_login:
-                        print("Třikrát jste zadal(a) neplatné přihlašovací údaje. Ukončuji program.")
-                        exit()
+        if not valid_login:
+                print("Třikrát jste zadal(a) neplatné přihlašovací údaje. Ukončuji program.")
+                exit()
 
+prihlasujici_fce()
 
 text_selection = int(input("Enter a number btw. 1 and 3 to select: ")) - 1
 print(slice_line)
-
-
-
 
 if text_selection + 1 < 1 or text_selection + 1 > 3:
        print("Neplatná volba")
