@@ -12,6 +12,25 @@ slice_line =  "-" * 30
 Registered_accounts = {"bob" : "123" , "ann" : "pass123" , 
                        "mike" : "password123", "liz" : "pass123"}
 
+def graphwrite():
+       words_lengths = {}
+
+       for word in splited_text:
+               length = len(word)
+               if length in words_lengths:
+                       words_lengths[length] += 1
+               else:
+                      words_lengths[length] = 1
+
+       max_length = max(words_lengths.keys())
+
+       for length in range(1, max_length + 1):
+                count = words_lengths.get(length, 0)
+                line = f"{length:2d}| {'*' * count} |{count}."
+                print(f"{length:3d}|{'*' * count:15s}|{count:2d}")
+
+
+
 # Vyzadat si prihlasovaci jmeno a heslo
 # Zadat jmeno a heslo
 #  IF jmeno se shoduje s heslem:
@@ -34,44 +53,46 @@ Registered_accounts = {"bob" : "123" , "ann" : "pass123" ,
                             # sumu všech čísel (ne cifer) v textu.
 # Vytiskni vysledek
 
-login_name = input("Zadej prihlasovaci jmeno: ")
-login_password = (input("Zadej heslo: "))  
+slice_line = "-" * 40
 
-for _ in range(3):
-        if login_name in Registered_accounts and login_password == (Registered_accounts[login_name]):
-                print(f""" {slice_line}
+def prihlasujici_fce():
+
+        valid_login = False
+
+        for _ in range(3):
+                login_name = input("Zadej přihlašovací jméno: ")
+                login_password = input("Zadej heslo: ")
+
+                if login_name in Registered_accounts and login_password == Registered_accounts[login_name]:
+                        valid_login = True
+                        print(f"""
+                {slice_line}
                 Welcome to the app, {login_name}
                 We have 3 texts to be analyzed.
-                {slice_line}                     
-                        """ )
-                break
-        else: 
-                print("Nesprávné údaje")
-                login_name = input("Zadej prihlasovaci jmeno: ")
-                login_password = (input("Zadej heslo: ")) 
-                if _ == 2 and login_name not in Registered_accounts and login_password != (Registered_accounts[login_name]):
-                        print("unregistered user, terminating the program..")
-                        quit()
+                {slice_line}
+                """)
+                        break
+                else:
+                        print("Neplatné přihlašovací údaje")
 
+                if not valid_login:
+                        print("Třikrát jste zadal(a) neplatné přihlašovací údaje. Ukončuji program.")
+                        exit()
 
-print(f""" {slice_line}
-Welcome to the app, {login_name}
-We have 3 texts to be analyzed.
-{slice_line}                     
-         """ )
 
 text_selection = int(input("Enter a number btw. 1 and 3 to select: ")) - 1
 print(slice_line)
-words_title_case_number = 0
-splited_text = task_template.TEXTS[text_selection].split()
 
 
 
-if text_selection < 1 or text_selection > 3:
+
+if text_selection + 1 < 1 or text_selection + 1 > 3:
        print("Neplatná volba")
        quit()
 else:
-  
+       words_title_case_number = 0
+       splited_text = task_template.TEXTS[text_selection].split()
+        
        words_count = len(re.findall(r'\w+',task_template.TEXTS[text_selection]))
        print(f"There are {words_count} words in the selected text.")
 
@@ -96,6 +117,21 @@ else:
        print(slice_line)
        print("LEN|  OCCURENCES  |NR.")
        print(slice_line)
+
+        #Cast vykresleni grafu..........
+       graphwrite()
+
+
+       
+
+       
+       
+                
+
+
+        
+       
+       
 
     
 

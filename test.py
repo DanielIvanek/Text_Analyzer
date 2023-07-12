@@ -1,20 +1,29 @@
-import re
+def word_length_histogram(text):
+    word_lengths = {}
 
-text = '''
-Situated about 10 miles west of Kemmerer,
-Fossil Butte is a ruggedly impressive
-topographic feature that rises sharply
-some 1000 feet above Twin Creek Valley
-to an elevation of more than 7500 feet
-above sea level. The butte is located just
-north of US 30N and the Union Pacific Railroad,
-which traverse the valley.
-'''
+    # Rozdělí text na jednotlivá slova
+    words = text.split()
 
-# Získání všech samostatných čísel ve větě
-numbers = re.findall(r'\b\d+\b(?!N)', text)
+    # Spočítá délku každého slova a zvýší početnost pro danou délku
+    for word in words:
+        length = len(word)
+        if length in word_lengths:
+            word_lengths[length] += 1
+        else:
+            word_lengths[length] = 1
 
-# Výpis nalezených čísel
-print("Samostatná čísla v textu:")
-for number in numbers:
-    print(number)
+    # Získá maximální délku slova
+    max_length = max(word_lengths.keys())
+
+    # Pro každou délku slova vytvoří řádek grafu
+    for length in range(1, max_length + 1):
+        # Získá početnost pro danou délku slova, pokud existuje, jinak je početnost 0
+        count = word_lengths.get(length, 0)
+
+        # Vytvoří řádek grafu
+        line = f"{length:2d}| {'*' * count}"
+        print(line)
+
+# Příklad použití
+text = "Toto je jednoduchý příklad textu pro sloupcový graf"
+word_length_histogram(text)
