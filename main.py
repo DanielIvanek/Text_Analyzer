@@ -31,11 +31,13 @@ discord: notme1275
 import task_template
 import re
 # print(task_template.TEXTS)
-slice_line =  "-" * 30
 
+slice_line =  "-" * 30
 Registered_accounts = {"bob" : "123" , "ann" : "pass123" , 
                        "mike" : "password123", "liz" : "pass123"}
 slice_line = "-" * 40
+
+
 
 def graphwrite():
        words_lengths = {}
@@ -78,8 +80,20 @@ We have 3 texts to be analyzed.
                 print("Třikrát jste zadal(a) neplatné přihlašovací údaje. Ukončuji program.")
                 exit()
 
+
+
+
+
+
+
+
+
+
+#Cast prihlaseni uzivatele
 prihlasujici_fce()
 
+
+#Cast analyzy textu
 text_selection = int(input("Enter a number btw. 1 and 3 to select: ")) - 1
 print(slice_line)
 
@@ -115,7 +129,7 @@ else:
        print("LEN|  OCCURENCES  |NR.")
        print(slice_line)
 
-        #Cast vykresleni grafu..........
+#Cast vykresleni grafu..........
        graphwrite()
 
 
